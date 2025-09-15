@@ -1,0 +1,20 @@
+html, body {
+	font-family: "Geist", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+	scroll-behavior: smooth;
+}
+
+a {
+	@apply no-underline;
+	@apply text-sky-800;
+	@apply cursor-pointer;
+
+	@apply hover:underline;
+}
+
+button {
+	cursor: pointer;
+}
+
+section {
+	scroll-margin-top: 50px;
+}

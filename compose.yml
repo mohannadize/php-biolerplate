@@ -1,0 +1,62 @@
+services:
+  mysql:
+    image: mariadb:10.6.22
+    container_name: brainandbody_mysql
+    platform: linux/amd64
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: brainandbody
+      MYSQL_USER: brainandbody
+      MYSQL_PASSWORD: 1234
+    restart: unless-stopped
+    networks:
+      - brainandbody_network
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: brainandbody_phpmyadmin
+    platform: linux/amd64
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: 1234
+    depends_on:
+      - mysql
+    networks:
+      - brainandbody_network
+
+  php:
+    build:
+      context: .
+      dockerfile_inline: |
+        FROM php:8.1-apache
+        RUN docker-php-ext-install mysqli pdo pdo_mysql
+        RUN a2enmod rewrite
+        COPY dist/ /var/www/html/
+        RUN chown -R www-data:www-data /var/www/html
+        RUN chmod -R 755 /var/www/html
+    container_name: brainandbody_php
+    ports:
+      - "8000:80"
+    volumes:
+      - ./dist:/var/www/html
+    environment:
+      - DB_HOST=mysql
+      - DB_NAME=brainandbody
+      - DB_USER=brainandbody
+      - DB_PASS=1234
+      - WEXTRACTOR_API_KEY=04cbcd1bda7169a3fe97822fa7c070fd33085ddb
+    depends_on:
+      - mysql
+      - phpmyadmin
+    networks:
+      - brainandbody_network
+
+networks:
+  brainandbody_network:
+    driver: bridge

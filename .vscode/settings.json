@@ -1,0 +1,10 @@
+{
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"typescript.tsdk": "node_modules/typescript/lib",
+	"[php]": {
+		"editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
+	},
+	"[css]": {
+		"editor.defaultFormatter": "vscode.css-language-features"
+	}
+}

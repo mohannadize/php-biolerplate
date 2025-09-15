@@ -1,0 +1,71 @@
+{
+	"name": "php-vite-starter",
+	"description": "A modern vanilla PHP-Vite starter repo, utilizing vite-plugin-php",
+	"version": "1.0.0",
+	"type": "module",
+	"scripts": {
+		"dev": "vite",
+		"build": "tsc --noEmit && vite build",
+		"composer": "php ./bin/composer.phar"
+	},
+	"keywords": [
+		"php-vite-starter",
+		"vite",
+		"php",
+		"starter",
+		"template",
+		"tailwindcss",
+		"tailwind",
+		"typescript",
+		"auto-refresh",
+		"auto-reload",
+		"sass",
+		"scss",
+		"starter-repo",
+		"php-starter"
+	],
+	"readme": "README.md",
+	"license": "See MIT license in LICENSE",
+	"homepage": "https://github.com/nititech/php-vite-starter",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/nititech/php-vite-starter.git"
+	},
+	"bugs": {
+		"url": "https://github.com/nititech/php-vite-starter/issues",
+		"email": "mail@nititech.de"
+	},
+	"author": {
+		"name": "nititech",
+		"email": "mail@nititech.de",
+		"url": "https://nititech.de"
+	},
+	"devDependencies": {
+		"@prettier/plugin-php": "^0.22.4",
+		"@tailwindcss/vite": "^4.0.7",
+		"@types/node": "^22.13.4",
+		"prettier": "^3.5.1",
+		"sass": "^1.85.0",
+		"tailwindcss": "^4.0.7",
+		"typescript": "^5.7.3",
+		"vite": "^6.1.1",
+		"vite-imagetools": "^7.0.5",
+		"vite-plugin-ejs": "^1.7.0",
+		"vite-plugin-php": "^2.0.1",
+		"vite-plugin-static-copy": "^2.2.0",
+		"vite-plugin-svgr": "^4.3.0",
+		"vite-tsconfig-paths": "^5.1.4"
+	},
+	"trustedDependencies": [
+		"@parcel/watcher"
+	],
+	"dependencies": {
+		"@tailwindcss/typography": "^0.5.16",
+		"@types/react": "^19.1.12",
+		"@types/react-dom": "^19.1.8",
+		"@vitejs/plugin-react": "^5.0.2",
+		"daisyui": "^5.1.10",
+		"react": "^19.1.1",
+		"react-dom": "^19.1.1"
+	}
+}
