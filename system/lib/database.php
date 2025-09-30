@@ -29,6 +29,11 @@ class MySQLiResult
 		return array_shift($this->data);
 	}
 
+	public function fetch_all()
+	{
+		return $this->data;
+	}
+
 	public function free()
 	{
 		$this->data = [];
@@ -92,7 +97,7 @@ class DB
 		self::$password = $password;
 		self::$dbase = $dbase;
 		self::open_connection();
-		
+
 		// Register shutdown function - equivalent to __destruct for static class
 		register_shutdown_function([self::class, 'cleanup']);
 	}
@@ -137,7 +142,7 @@ class DB
 				self::rollback();
 			}
 		}
-		
+
 		// Close the database connection
 		self::close_connection();
 	}
@@ -324,6 +329,30 @@ class DB
 	public static function num_rows($result_set)
 	{
 		return ($result_set->num_rows());
+	}
+
+	public static function insert(string $table_name, array $columns, array $values)
+	{
+		$prepared_values = [];
+		$placeholders = [];
+
+		if (!is_array($values[0])) {
+			$values = [$values];
+		}
+
+		foreach ($values as $value) {
+			$row_placeholders = [];
+			foreach ($columns as $column) {
+				$prepared_values[] = $value[$column];
+				$row_placeholders[] = "?";
+			}
+			$placeholders[] = implode(",", $row_placeholders);
+		}
+
+		$placeholders = implode("),(", $placeholders);
+		$columns = implode("`,`", $columns);
+		$query = "INSERT INTO `$table_name` (`$columns`) VALUES ($placeholders)";
+		return self::query($query, $prepared_values);
 	}
 
 	public static function insert_id()
